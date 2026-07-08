@@ -2,7 +2,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/client",
   "framework": "vite",
-  "nodeVersion": "20.x",
   "rewrites": [
     {
       "source": "/(.*)",
