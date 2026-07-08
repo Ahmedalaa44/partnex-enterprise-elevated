@@ -36,13 +36,32 @@ export const Route = createFileRoute("/")({
 /* ---------------- Brand mark ---------------- */
 
 function Mark({ className = "h-7 w-7" }: { className?: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (!failed) {
+    return (
+      <img
+        src="/favicon-.png"
+        className={className}
+        aria-hidden
+        alt=""
+        onError={() => setFailed(true)}
+      />
+    );
+  }
+
   return (
-    <img
-      src="/partnex-logo.jpeg"
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
       className={className}
       aria-hidden
-      alt=""
-    />
+    >
+      <rect x="2" y="2" width="20" height="20" rx="4" fill="#0ea5e9" />
+      <text x="12" y="16" textAnchor="middle" fontFamily="sans-serif" fontSize="10" fill="#fff">P</text>
+    </svg>
   );
 }
 
