@@ -89,9 +89,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Enterprise cloud, cybersecurity and managed services from Partnex.",
       },
     ],
-    links: [
+      links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "icon", type: "image/jpeg", href: "/partnex-logo.jpeg" },
     ],
   }),
   shellComponent: RootShell,
