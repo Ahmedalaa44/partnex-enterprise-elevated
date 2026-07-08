@@ -527,7 +527,7 @@ function SolutionsSection() {
       <div className="relative mx-auto max-w-7xl px-6">
         <SectionHeading
           eyebrow="Solutions"
-          title={<>Outcome-driven solutions, <span className="text-gradient-brand">purpose-built.</span></>}
+          title={<>Outcome driven solutions, <span className="text-gradient-brand">purpose built.</span></>}
           description="Reference architectures and integrated solutions that combine best-in-class platforms with Partnex engineering."
         />
         <div className="mt-16 grid gap-5 md:grid-cols-2">
@@ -816,7 +816,7 @@ function Footer() {
             {[
               ["Company", ["About", "#about"], ["Why Partnex", "#why"], ["Process", "#process"], ["Contact", "#contact"]],
               ["Capabilities", ["Services", "#services"], ["Solutions", "#solutions"], ["Industries", "#industries"], ["Partners", "#partners"]],
-              ["Contact", ["Info@partnex.net", "mailto:Info@partnex.net"], ["01285454459", "tel:01285454459"], ["Dubai, UAE", "#contact"]],
+              ["Contact", ["Info@partnex.net", "mailto:Info@partnex.net"], ["01285454459", "tel:01285454459"]],
             ].map(([title, ...links]) => (
               <div key={title as string}>
                 <div className="text-xs font-semibold uppercase tracking-widest text-white">{title as string}</div>
