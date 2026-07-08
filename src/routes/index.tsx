@@ -37,18 +37,12 @@ export const Route = createFileRoute("/")({
 
 function Mark({ className = "h-7 w-7" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 64 64" className={className} aria-hidden>
-      <defs>
-        <linearGradient id="pxg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#7070E8" />
-          <stop offset="1" stopColor="#C76CDD" />
-        </linearGradient>
-      </defs>
-      <path
-        fill="url(#pxg)"
-        d="M18 8h8v10c0 5 3 8 8 14-5 6-8 9-8 14v10h-8V46c0-6 4-10 8-14-4-4-8-8-8-14V8zm20 0h8v10c0 6-4 10-8 14 4 4 8 8 8 14v10h-8V46c0-5-3-8-8-14 5-6 8-9 8-14V8z"
-      />
-    </svg>
+    <img
+      src="/partnex-logo.jpeg"
+      className={className}
+      aria-hidden
+      alt=""
+    />
   );
 }
 
