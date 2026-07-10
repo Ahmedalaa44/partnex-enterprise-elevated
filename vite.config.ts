@@ -28,15 +28,15 @@ export default defineConfig({
           if (id.includes("@tanstack/react-router") || id.includes("@tanstack/react-start")) return "router";
           if (id.includes("@tanstack/react-query")) return "query";
         },
-        chunkFileNames: "chunks/[name].[hash].js",
-        entryFileNames: "[name].[hash].js",
+        chunkFileNames: "chunks/[name].js",
+        entryFileNames: "index.js",
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name.split(".");
           const ext = info[info.length - 1];
           if (/png|jpe?g|gif|svg|webp|avif|ico|woff|woff2|eot|ttf|otf/.test(ext)) {
-            return `assets/[name].[hash][extname]`;
+            return `assets/[name][extname]`;
           }
-          return `assets/[name].[hash][extname]`;
+          return `assets/[name][extname]`;
         },
       },
       external: [],
