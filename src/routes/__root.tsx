@@ -48,12 +48,18 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-medium text-white"
           >
             Try again
           </button>
-          <a href="/" className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-foreground hover:bg-white/5">
+          <a
+            href="/"
+            className="rounded-full border border-hairline px-5 py-2.5 text-sm font-medium text-foreground hover:bg-white/5"
+          >
             Go home
           </a>
         </div>
@@ -85,11 +91,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Partnex | Build the Next" },
       {
         name: "twitter:description",
-        content:
-          "Enterprise cloud, cybersecurity and managed services from Partnex.",
+        content: "Enterprise cloud, cybersecurity and managed services from Partnex.",
       },
     ],
-      links: [
+    links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-.png" },

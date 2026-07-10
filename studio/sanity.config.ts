@@ -1,6 +1,6 @@
-import {defineConfig} from 'sanity'
-import {deskTool} from 'sanity/desk'
-import {visionTool} from '@sanity/vision'
+import { defineConfig } from "sanity";
+import { deskTool } from "sanity/desk";
+import { visionTool } from "@sanity/vision";
 import {
   heroSchema,
   aboutSchema,
@@ -10,15 +10,15 @@ import {
   footerSchema,
   seoSchema,
   projectSchema,
-  teamSchema
-} from './schemaTypes'
+  teamSchema,
+} from "./schemaTypes";
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID || ''
-const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || "";
+const dataset = process.env.SANITY_STUDIO_DATASET || "production";
 
 export default defineConfig({
-  name: 'partnex_studio',
-  title: 'Partnex Studio',
+  name: "partnex_studio",
+  title: "Partnex Studio",
   projectId,
   dataset,
   plugins: [deskTool(), visionTool()],
@@ -32,7 +32,7 @@ export default defineConfig({
       footerSchema,
       seoSchema,
       projectSchema,
-      teamSchema
+      teamSchema,
     ],
   },
-})
+});

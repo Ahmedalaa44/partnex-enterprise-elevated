@@ -25,7 +25,8 @@ export default defineConfig({
           if (id.includes("framer-motion")) return "framer";
           if (id.includes("@sanity/client") || id.includes("@sanity/image-url")) return "sanity";
           if (id.includes("react") || id.includes("react-dom")) return "react-vendor";
-          if (id.includes("@tanstack/react-router") || id.includes("@tanstack/react-start")) return "router";
+          if (id.includes("@tanstack/react-router") || id.includes("@tanstack/react-start"))
+            return "router";
           if (id.includes("@tanstack/react-query")) return "query";
         },
         chunkFileNames: "chunks/[name].js",

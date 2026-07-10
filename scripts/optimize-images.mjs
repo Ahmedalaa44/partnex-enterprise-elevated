@@ -1,11 +1,11 @@
-import sharp from 'sharp';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import sharp from "sharp";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const assetsDir = path.join(__dirname, '../src/assets');
-const publicDir = path.join(__dirname, '../public');
+const assetsDir = path.join(__dirname, "../src/assets");
+const publicDir = path.join(__dirname, "../public");
 
 const QUALITY = 80;
 const WEBP_QUALITY = 75;
@@ -17,7 +17,7 @@ async function optimizeImage(inputPath, outputDir) {
     const ext = path.parse(inputPath).ext.toLowerCase();
 
     // Skip SVGs - they're already optimized
-    if (ext === '.svg') {
+    if (ext === ".svg") {
       console.log(`✓ Skipping SVG: ${filename}`);
       return;
     }
@@ -27,23 +27,23 @@ async function optimizeImage(inputPath, outputDir) {
 
     // Create WebP version
     await image
-      .toFormat('webp', { quality: WEBP_QUALITY })
+      .toFormat("webp", { quality: WEBP_QUALITY })
       .toFile(path.join(outputDir, `${filename}.webp`));
     console.log(`✓ Created WebP: ${filename}.webp`);
 
     // Create AVIF version (more aggressively compressed)
     await sharp(inputPath)
-      .toFormat('avif', { quality: AVIF_QUALITY })
+      .toFormat("avif", { quality: AVIF_QUALITY })
       .toFile(path.join(outputDir, `${filename}.avif`));
     console.log(`✓ Created AVIF: ${filename}.avif`);
 
     // Optimize original JPG/PNG
-    if (ext === '.jpg' || ext === '.jpeg') {
+    if (ext === ".jpg" || ext === ".jpeg") {
       await sharp(inputPath)
         .jpeg({ quality: QUALITY, progressive: true })
         .toFile(path.join(outputDir, `${filename}-optimized.jpg`));
       console.log(`✓ Optimized JPG: ${filename}-optimized.jpg`);
-    } else if (ext === '.png') {
+    } else if (ext === ".png") {
       await sharp(inputPath)
         .png({ compressionLevel: 9 })
         .toFile(path.join(outputDir, `${filename}-optimized.png`));
@@ -75,17 +75,17 @@ async function processDirectory(dir) {
 }
 
 async function main() {
-  console.log('🖼️  Starting image optimization...\n');
-  
-  console.log('Processing src/assets directory...');
+  console.log("🖼️  Starting image optimization...\n");
+
+  console.log("Processing src/assets directory...");
   await processDirectory(assetsDir);
-  
-  console.log('\nProcessing public directory...');
+
+  console.log("\nProcessing public directory...");
   await processDirectory(publicDir);
-  
-  console.log('\n✅ Image optimization complete!');
-  console.log('\nNote: Use .webp for modern browsers, .avif for cutting-edge browsers,');
-  console.log('and the original format as fallback.');
+
+  console.log("\n✅ Image optimization complete!");
+  console.log("\nNote: Use .webp for modern browsers, .avif for cutting-edge browsers,");
+  console.log("and the original format as fallback.");
 }
 
 main().catch(console.error);

@@ -1,15 +1,24 @@
 import heroImage from "../assets/hero-bg.jpg";
 import type { HomePageContent } from "../lib/sanityTypes";
 
-const partnerLogoModules = import.meta.glob("../assets/partner-logos/*.{svg,png,jpg,jpeg}", { eager: true }) as Record<string, { default: string }>;
+const partnerLogoModules = import.meta.glob("../assets/partner-logos/*.{svg,png,jpg,jpeg}", {
+  eager: true,
+}) as Record<string, { default: string }>;
 const partnerLogos = Object.fromEntries(
-  Object.entries(partnerLogoModules).map(([filePath, mod]) => [filePath.split("/").pop()!.toLowerCase(), mod.default]),
+  Object.entries(partnerLogoModules).map(([filePath, mod]) => [
+    filePath.split("/").pop()!.toLowerCase(),
+    mod.default,
+  ]),
 );
 
 function findLogo(fileName: string) {
   const key = fileName.toLowerCase();
   if (partnerLogos[key]) return partnerLogos[key];
-  return partnerLogos[Object.keys(partnerLogos).find((k) => k.replace(/\.[^.]+$/, "") === fileName.replace(/\.[^.]+$/, "").toLowerCase())!];
+  return partnerLogos[
+    Object.keys(partnerLogos).find(
+      (k) => k.replace(/\.[^.]+$/, "") === fileName.replace(/\.[^.]+$/, "").toLowerCase(),
+    )!
+  ];
 }
 
 export const defaultHomeContent: HomePageContent = {
@@ -17,7 +26,8 @@ export const defaultHomeContent: HomePageContent = {
     eyebrow: "System Integration · Cloud · Cybersecurity",
     title: "Build the Next enterprise of tomorrow.",
     titleHighlight: "Next",
-    description: "Partnex helps organizations design, deploy and operate secure, scalable and intelligent IT environments. We connect business ambition with the right technology to accelerate transformation and drive sustainable growth.",
+    description:
+      "Partnex helps organizations design, deploy and operate secure, scalable and intelligent IT environments. We connect business ambition with the right technology to accelerate transformation and drive sustainable growth.",
     primaryCtaText: "Start a conversation",
     primaryCtaUrl: "#contact",
     secondaryCtaText: "Explore capabilities",
@@ -34,28 +44,64 @@ export const defaultHomeContent: HomePageContent = {
     eyebrow: "Who we are",
     title: "A partner engineered for what comes next.",
     titleHighlight: "what comes next.",
-    description: "Our name is a union of Partner and Next. We connect business objectives with the right technology — from cloud infrastructure and cybersecurity to modern workplace, data protection and managed services.",
-    descriptionSecondary: "We combine proven experience with a customer-focused approach to deliver solutions that are effective, resilient and aligned with real business outcomes.",
+    description:
+      "Our name is a union of Partner and Next. We connect business objectives with the right technology — from cloud infrastructure and cybersecurity to modern workplace, data protection and managed services.",
+    descriptionSecondary:
+      "We combine proven experience with a customer-focused approach to deliver solutions that are effective, resilient and aligned with real business outcomes.",
     cards: [
       {
         title: "Our Vision",
-        description: "To be the region's leading technology partner, empowering organizations to build a smarter, safer and more connected tomorrow.",
+        description:
+          "To be the region's leading technology partner, empowering organizations to build a smarter, safer and more connected tomorrow.",
       },
       {
         title: "Our Mission",
-        description: "Deliver innovative, reliable and future-ready solutions that help clients grow, operate efficiently and achieve their goals.",
+        description:
+          "Deliver innovative, reliable and future-ready solutions that help clients grow, operate efficiently and achieve their goals.",
       },
     ],
   },
   services: [
-    { icon: "Cloud", title: "Cloud Solutions", desc: "Scalable cloud architectures that accelerate innovation, agility and time to value." },
-    { icon: "ShieldCheck", title: "Cybersecurity", desc: "Advanced security programs that reduce risk and protect what matters most." },
-    { icon: "DatabaseBackup", title: "Data Protection", desc: "Backup, disaster recovery and resilience engineered for continuity." },
-    { icon: "Server", title: "Infrastructure", desc: "Modern infrastructure designed for performance, reliability and scale." },
-    { icon: "Laptop", title: "Modern Workplace", desc: "Empowering teams to collaborate and work smarter from anywhere." },
-    { icon: "Activity", title: "Managed Services", desc: "Proactive 24/7 monitoring, management and continuous optimization." },
-    { icon: "Network", title: "Networking & Communication", desc: "High-performance connectivity that keeps your operations ahead." },
-    { icon: "Compass", title: "Consulting & Advisory", desc: "Expert guidance aligning technology decisions with your business goals." },
+    {
+      icon: "Cloud",
+      title: "Cloud Solutions",
+      desc: "Scalable cloud architectures that accelerate innovation, agility and time to value.",
+    },
+    {
+      icon: "ShieldCheck",
+      title: "Cybersecurity",
+      desc: "Advanced security programs that reduce risk and protect what matters most.",
+    },
+    {
+      icon: "DatabaseBackup",
+      title: "Data Protection",
+      desc: "Backup, disaster recovery and resilience engineered for continuity.",
+    },
+    {
+      icon: "Server",
+      title: "Infrastructure",
+      desc: "Modern infrastructure designed for performance, reliability and scale.",
+    },
+    {
+      icon: "Laptop",
+      title: "Modern Workplace",
+      desc: "Empowering teams to collaborate and work smarter from anywhere.",
+    },
+    {
+      icon: "Activity",
+      title: "Managed Services",
+      desc: "Proactive 24/7 monitoring, management and continuous optimization.",
+    },
+    {
+      icon: "Network",
+      title: "Networking & Communication",
+      desc: "High-performance connectivity that keeps your operations ahead.",
+    },
+    {
+      icon: "Compass",
+      title: "Consulting & Advisory",
+      desc: "Expert guidance aligning technology decisions with your business goals.",
+    },
   ],
   partners: [
     { name: "Microsoft", website: "https://www.microsoft.com", logo: findLogo("microsoft.svg") },
@@ -82,10 +128,12 @@ export const defaultHomeContent: HomePageContent = {
     email: "Info@partnex.net",
     phone: "01285454459",
     address: "",
-    description: "Tell us about your goals. Our team will get back within one business day with a tailored response.",
+    description:
+      "Tell us about your goals. Our team will get back within one business day with a tailored response.",
   },
   footer: {
-    companyDescription: "A next-generation technology partner helping organizations build secure, scalable and intelligent IT environments.",
+    companyDescription:
+      "A next-generation technology partner helping organizations build secure, scalable and intelligent IT environments.",
     linkedinUrl: "#",
     navSections: [
       {
@@ -119,7 +167,8 @@ export const defaultHomeContent: HomePageContent = {
   },
   seo: {
     title: "Partnex | System Integration & Digital Solutions",
-    description: "Partnex is a next-generation system integrator delivering secure, scalable and intelligent cloud, cybersecurity, data protection and managed services that power your next.",
+    description:
+      "Partnex is a next-generation system integrator delivering secure, scalable and intelligent cloud, cybersecurity, data protection and managed services that power your next.",
     ogImage: undefined,
   },
 };

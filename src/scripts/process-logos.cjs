@@ -1,25 +1,25 @@
-const _JimpPkg = require('jimp');
+const _JimpPkg = require("jimp");
 let Jimp = _JimpPkg.Jimp || _JimpPkg.default || _JimpPkg;
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 
-const folder = path.join(__dirname, '..', 'assets', 'partner-logos');
+const folder = path.join(__dirname, "..", "assets", "partner-logos");
 
 // files to process (only the raster ones we added)
 const files = [
-  'acronis.png',
-  'adobe.png',
-  'aruba.png',
-  'commvault.png',
-  'eset.png',
-  'hikvision.png',
-  'sophos.png',
+  "acronis.png",
+  "adobe.png",
+  "aruba.png",
+  "commvault.png",
+  "eset.png",
+  "hikvision.png",
+  "sophos.png",
 ];
 
 async function processFile(file) {
   const p = path.join(folder, file);
   if (!fs.existsSync(p)) {
-    console.warn('missing', file);
+    console.warn("missing", file);
     return;
   }
 
@@ -53,9 +53,9 @@ async function processFile(file) {
     out.composite(img, pad, pad);
 
     await out.writeAsync(p);
-    console.log('processed', file, '->', outW + 'x' + outH);
+    console.log("processed", file, "->", outW + "x" + outH);
   } catch (err) {
-    console.error('error processing', file, err.message);
+    console.error("error processing", file, err.message);
   }
 }
 
@@ -64,5 +64,5 @@ async function processFile(file) {
     // try with lowercase and original
     await processFile(f);
   }
-  console.log('done');
+  console.log("done");
 })();

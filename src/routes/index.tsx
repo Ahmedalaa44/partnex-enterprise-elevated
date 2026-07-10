@@ -6,10 +6,33 @@ import { OptimizedImage } from "../components/OptimizedImage";
 import { defaultHomeContent } from "../data/defaultContent";
 import { useSanityContent } from "../hooks/useSanityContent";
 import {
-  ArrowRight, ArrowUpRight, Check, Menu, X, Mail, Phone, MapPin, Linkedin,
-  Building2, Landmark, Factory, HeartPulse, Hotel, Banknote, Plane, Briefcase,
-  GraduationCap, Radio, Truck, Globe2, Sparkles, ShieldAlert, Zap, Handshake,
-  Users, Target,
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Menu,
+  X,
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Building2,
+  Landmark,
+  Factory,
+  HeartPulse,
+  Hotel,
+  Banknote,
+  Plane,
+  Briefcase,
+  GraduationCap,
+  Radio,
+  Truck,
+  Globe2,
+  Sparkles,
+  ShieldAlert,
+  Zap,
+  Handshake,
+  Users,
+  Target,
   type LucideIcon,
 } from "lucide-react";
 import { getIconByName } from "../lib/iconMapper";
@@ -17,9 +40,7 @@ import type { HomePageContent } from "../lib/sanityTypes";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { property: "og:image", content: "/favicon.svg" },
-    ],
+    meta: [{ property: "og:image", content: "/favicon.svg" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -65,7 +86,9 @@ function Mark({ className = "h-7 w-7" }: { className?: string }) {
       aria-hidden
     >
       <rect x="2" y="2" width="20" height="20" rx="4" fill="#0ea5e9" />
-      <text x="12" y="16" textAnchor="middle" fontFamily="sans-serif" fontSize="10" fill="#fff">P</text>
+      <text x="12" y="16" textAnchor="middle" fontFamily="sans-serif" fontSize="10" fill="#fff">
+        P
+      </text>
     </svg>
   );
 }
@@ -74,9 +97,7 @@ function Logo({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
       <Mark className="h-8 w-8" />
-      <span className="font-display text-xl font-semibold tracking-tight text-white">
-        Partnex
-      </span>
+      <span className="font-display text-xl font-semibold tracking-tight text-white">Partnex</span>
     </div>
   );
 }
@@ -89,8 +110,14 @@ const fadeUp = {
 };
 
 function Reveal({
-  children, delay = 0, className = "",
-}: { children: ReactNode; delay?: number; className?: string }) {
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}) {
   const reduce = useReducedMotion();
   return (
     <motion.div
@@ -107,9 +134,15 @@ function Reveal({
 }
 
 function SectionHeading({
-  eyebrow, title, description, align = "left",
+  eyebrow,
+  title,
+  description,
+  align = "left",
 }: {
-  eyebrow: string; title: ReactNode; description?: string; align?: "left" | "center";
+  eyebrow: string;
+  title: ReactNode;
+  description?: string;
+  align?: "left" | "center";
 }) {
   return (
     <div className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}>
@@ -140,9 +173,14 @@ function SectionHeading({
 
 // Partner logos now loaded from Sanity via useSanityContent hook
 
-const partnerLogoModules = import.meta.glob("../assets/partner-logos/*.{svg,png,jpg,jpeg}", { eager: true }) as Record<string, { default: string }>;
+const partnerLogoModules = import.meta.glob("../assets/partner-logos/*.{svg,png,jpg,jpeg}", {
+  eager: true,
+}) as Record<string, { default: string }>;
 const partnerLogos: Record<string, string> = Object.fromEntries(
-  Object.entries(partnerLogoModules).map(([filePath, mod]) => [filePath.split("/").pop()!.toLowerCase(), (mod as any).default]),
+  Object.entries(partnerLogoModules).map(([filePath, mod]) => [
+    filePath.split("/").pop()!.toLowerCase(),
+    mod.default,
+  ]),
 );
 
 function findLogoForFile(fileName: string) {
@@ -153,46 +191,165 @@ function findLogoForFile(fileName: string) {
   return key ? partnerLogos[key] : "";
 }
 const industries = [
-  { icon: Landmark, name: "Government", desc: "Enabling digital transformation and secure public services." },
-  { icon: Building2, name: "Real Estate", desc: "Powering smart infrastructure and seamless operations." },
-  { icon: Factory, name: "Oil & Gas", desc: "Reliable, secure and scalable solutions for critical operations." },
-  { icon: HeartPulse, name: "Healthcare", desc: "Secure, intelligent healthcare technology for better outcomes." },
-  { icon: Hotel, name: "Hospitality", desc: "Elevating guest experiences with innovative technology." },
-  { icon: Banknote, name: "Finance & Banking", desc: "Strengthening security, compliance and performance." },
-  { icon: Plane, name: "Aviation", desc: "Efficiency, safety and connectivity in a fast-moving industry." },
-  { icon: Briefcase, name: "Corporate", desc: "Optimizing operations and driving growth through technology." },
-  { icon: GraduationCap, name: "Education", desc: "Empowering learning institutions with future-ready platforms." },
-  { icon: Radio, name: "Telecom", desc: "Connectivity, agility and next-generation digital experiences." },
-  { icon: Truck, name: "Transportation", desc: "Smarter, safer and more connected transport ecosystems." },
-  { icon: Globe2, name: "Multinationals", desc: "Global-grade solutions delivered with local expertise." },
+  {
+    icon: Landmark,
+    name: "Government",
+    desc: "Enabling digital transformation and secure public services.",
+  },
+  {
+    icon: Building2,
+    name: "Real Estate",
+    desc: "Powering smart infrastructure and seamless operations.",
+  },
+  {
+    icon: Factory,
+    name: "Oil & Gas",
+    desc: "Reliable, secure and scalable solutions for critical operations.",
+  },
+  {
+    icon: HeartPulse,
+    name: "Healthcare",
+    desc: "Secure, intelligent healthcare technology for better outcomes.",
+  },
+  {
+    icon: Hotel,
+    name: "Hospitality",
+    desc: "Elevating guest experiences with innovative technology.",
+  },
+  {
+    icon: Banknote,
+    name: "Finance & Banking",
+    desc: "Strengthening security, compliance and performance.",
+  },
+  {
+    icon: Plane,
+    name: "Aviation",
+    desc: "Efficiency, safety and connectivity in a fast-moving industry.",
+  },
+  {
+    icon: Briefcase,
+    name: "Corporate",
+    desc: "Optimizing operations and driving growth through technology.",
+  },
+  {
+    icon: GraduationCap,
+    name: "Education",
+    desc: "Empowering learning institutions with future-ready platforms.",
+  },
+  {
+    icon: Radio,
+    name: "Telecom",
+    desc: "Connectivity, agility and next-generation digital experiences.",
+  },
+  {
+    icon: Truck,
+    name: "Transportation",
+    desc: "Smarter, safer and more connected transport ecosystems.",
+  },
+  {
+    icon: Globe2,
+    name: "Multinationals",
+    desc: "Global-grade solutions delivered with local expertise.",
+  },
 ];
 
 const whyPartnex = [
-  { icon: ShieldAlert, title: "Secure & Reliable", desc: "Security, compliance and reliability are engineered into every engagement." },
-  { icon: Target, title: "Measurable Impact", desc: "Solutions built to deliver efficiency, performance and tangible results." },
-  { icon: Sparkles, title: "Innovation Driven", desc: "We leverage emerging technologies to future-proof your organization." },
-  { icon: Users, title: "Expertise That Delivers", desc: "Certified professionals with deep, cross-domain technical mastery." },
-  { icon: Handshake, title: "Trusted Partnerships", desc: "Strong alliances with the world's leading technology providers." },
-  { icon: Zap, title: "Customer Centric", desc: "We listen, understand, and design solutions around real business needs." },
+  {
+    icon: ShieldAlert,
+    title: "Secure & Reliable",
+    desc: "Security, compliance and reliability are engineered into every engagement.",
+  },
+  {
+    icon: Target,
+    title: "Measurable Impact",
+    desc: "Solutions built to deliver efficiency, performance and tangible results.",
+  },
+  {
+    icon: Sparkles,
+    title: "Innovation Driven",
+    desc: "We leverage emerging technologies to future-proof your organization.",
+  },
+  {
+    icon: Users,
+    title: "Expertise That Delivers",
+    desc: "Certified professionals with deep, cross-domain technical mastery.",
+  },
+  {
+    icon: Handshake,
+    title: "Trusted Partnerships",
+    desc: "Strong alliances with the world's leading technology providers.",
+  },
+  {
+    icon: Zap,
+    title: "Customer Centric",
+    desc: "We listen, understand, and design solutions around real business needs.",
+  },
 ];
 
 const process = [
-  { n: "01", t: "Discover", d: "We understand your business, challenges and goals through in-depth consultation and current state review." },
-  { n: "02", t: "Design", d: "We architect the right solution with the appropriate technology mix and a clear roadmap." },
-  { n: "03", t: "Plan", d: "We build a clear execution plan covering resources, timelines and risk mitigation." },
-  { n: "04", t: "Implement", d: "We deploy with precision — integration, configuration and rigorous quality assurance." },
-  { n: "05", t: "Deliver", d: "We deliver on time with full performance testing and structured knowledge transfer." },
-  { n: "06", t: "Enable", d: "We empower your teams with training, workshops and adoption support." },
-  { n: "07", t: "Support", d: "Continuous support and proactive incident management for peace of mind." },
-  { n: "08", t: "Optimize", d: "Ongoing optimization and an innovation roadmap that keeps you ahead." },
+  {
+    n: "01",
+    t: "Discover",
+    d: "We understand your business, challenges and goals through in-depth consultation and current state review.",
+  },
+  {
+    n: "02",
+    t: "Design",
+    d: "We architect the right solution with the appropriate technology mix and a clear roadmap.",
+  },
+  {
+    n: "03",
+    t: "Plan",
+    d: "We build a clear execution plan covering resources, timelines and risk mitigation.",
+  },
+  {
+    n: "04",
+    t: "Implement",
+    d: "We deploy with precision — integration, configuration and rigorous quality assurance.",
+  },
+  {
+    n: "05",
+    t: "Deliver",
+    d: "We deliver on time with full performance testing and structured knowledge transfer.",
+  },
+  {
+    n: "06",
+    t: "Enable",
+    d: "We empower your teams with training, workshops and adoption support.",
+  },
+  {
+    n: "07",
+    t: "Support",
+    d: "Continuous support and proactive incident management for peace of mind.",
+  },
+  {
+    n: "08",
+    t: "Optimize",
+    d: "Ongoing optimization and an innovation roadmap that keeps you ahead.",
+  },
 ];
 
 const faqs = [
-  { q: "What does Partnex do?", a: "Partnex is a system integrator that designs, deploys and manages enterprise technology — spanning cloud, cybersecurity, data protection, infrastructure, modern workplace and managed services." },
-  { q: "Which industries do you serve?", a: "We work with organizations across government, finance, healthcare, oil and gas, real estate, hospitality, aviation, telecom, transportation, education and multinational enterprises." },
-  { q: "Are you certified with leading vendors?", a: "Yes. We hold active partnerships and certifications with Microsoft, Cisco, Fortinet, Veeam, VMware, Sophos, Huawei Cloud and other global technology leaders." },
-  { q: "Do you offer 24/7 managed services?", a: "Yes. Our managed services team provides continuous monitoring, incident response and proactive optimization around the clock." },
-  { q: "How do engagements typically start?", a: "Every engagement begins with a discovery session to understand your objectives, followed by a tailored solution design and a clear execution plan." },
+  {
+    q: "What does Partnex do?",
+    a: "Partnex is a system integrator that designs, deploys and manages enterprise technology — spanning cloud, cybersecurity, data protection, infrastructure, modern workplace and managed services.",
+  },
+  {
+    q: "Which industries do you serve?",
+    a: "We work with organizations across government, finance, healthcare, oil and gas, real estate, hospitality, aviation, telecom, transportation, education and multinational enterprises.",
+  },
+  {
+    q: "Are you certified with leading vendors?",
+    a: "Yes. We hold active partnerships and certifications with Microsoft, Cisco, Fortinet, Veeam, VMware, Sophos, Huawei Cloud and other global technology leaders.",
+  },
+  {
+    q: "Do you offer 24/7 managed services?",
+    a: "Yes. Our managed services team provides continuous monitoring, incident response and proactive optimization around the clock.",
+  },
+  {
+    q: "How do engagements typically start?",
+    a: "Every engagement begins with a discovery session to understand your objectives, followed by a tailored solution design and a clear execution plan.",
+  },
 ];
 
 /* ---------------- Sections ---------------- */
@@ -242,7 +399,9 @@ function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className={`mx-auto mt-4 flex max-w-7xl items-center justify-between rounded-full border border-hairline px-4 py-2.5 shadow-[0_20px_70px_-35px_rgba(0,0,0,0.9)] backdrop-blur-xl sm:px-6 ${scrolled ? "bg-background/80" : "bg-background/60"}`}>
+      <div
+        className={`mx-auto mt-4 flex max-w-7xl items-center justify-between rounded-full border border-hairline px-4 py-2.5 shadow-[0_20px_70px_-35px_rgba(0,0,0,0.9)] backdrop-blur-xl sm:px-6 ${scrolled ? "bg-background/80" : "bg-background/60"}`}
+      >
         <a href="#top" className="flex items-center">
           <Logo />
         </a>
@@ -265,7 +424,8 @@ function Nav() {
             href="#contact"
             className="group hidden items-center gap-1.5 rounded-full bg-white/[0.08] px-4 py-2 text-sm font-medium text-white ring-1 ring-inset ring-white/15 transition-all duration-300 hover:bg-white/[0.14] sm:inline-flex"
           >
-            Talk to us <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            Talk to us{" "}
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
           <button
             className="rounded-full border border-hairline bg-white/[0.04] p-2 text-white transition-colors hover:bg-white/[0.08] lg:hidden"
@@ -311,7 +471,10 @@ function Hero() {
         <div className="absolute right-[10%] top-[10%] h-[420px] w-[420px] rounded-full bg-[#C76CDD] opacity-25 blur-[120px] animate-float-slow" />
         <div className="absolute left-[5%] bottom-0 h-[380px] w-[380px] rounded-full bg-[#7070E8] opacity-20 blur-[120px]" />
       </motion.div>
-      <div className="absolute inset-0 bg-cover bg-center opacity-[0.14]" style={{ backgroundImage: `url(${heroImage})` }} />
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-[0.14]"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      />
       <div className="absolute inset-0 grid-bg opacity-[0.35] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-background to-transparent" />
 
@@ -345,7 +508,9 @@ function Hero() {
           </Reveal>
           <Reveal delay={0.15}>
             <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              Partnex helps organizations design, deploy and operate secure, scalable and intelligent IT environments. We connect business ambition with the right technology to accelerate transformation and drive sustainable growth.
+              Partnex helps organizations design, deploy and operate secure, scalable and
+              intelligent IT environments. We connect business ambition with the right technology to
+              accelerate transformation and drive sustainable growth.
             </p>
           </Reveal>
           <Reveal delay={0.22}>
@@ -379,7 +544,9 @@ function Hero() {
               ["100%", "Customer commitment"],
             ].map(([n, l]) => (
               <div key={l} className="bg-background/80 p-6 backdrop-blur-sm sm:p-8">
-                <div className="font-display text-3xl font-semibold text-gradient-brand sm:text-4xl">{n}</div>
+                <div className="font-display text-3xl font-semibold text-gradient-brand sm:text-4xl">
+                  {n}
+                </div>
                 <div className="mt-1 text-sm text-muted-foreground">{l}</div>
               </div>
             ))}
@@ -398,7 +565,12 @@ function AboutSection() {
           <div className="lg:col-span-5">
             <SectionHeading
               eyebrow="Who we are"
-              title={<>A partner engineered for <span className="text-gradient-brand">what comes next.</span></>}
+              title={
+                <>
+                  A partner engineered for{" "}
+                  <span className="text-gradient-brand">what comes next.</span>
+                </>
+              }
             />
           </div>
           <div className="lg:col-span-7 lg:pt-20">
@@ -418,14 +590,22 @@ function AboutSection() {
             </Reveal>
             <div className="mt-10 grid gap-6 sm:grid-cols-2">
               {[
-                { t: "Our Vision", d: "To be the region's leading technology partner, empowering organizations to build a smarter, safer and more connected tomorrow." },
-                { t: "Our Mission", d: "Deliver innovative, reliable and future-ready solutions that help clients grow, operate efficiently and achieve their goals." },
+                {
+                  t: "Our Vision",
+                  d: "To be the region's leading technology partner, empowering organizations to build a smarter, safer and more connected tomorrow.",
+                },
+                {
+                  t: "Our Mission",
+                  d: "Deliver innovative, reliable and future-ready solutions that help clients grow, operate efficiently and achieve their goals.",
+                },
               ].map((x, i) => (
                 <Reveal key={x.t} delay={0.15 + i * 0.08}>
                   <div className="group relative overflow-hidden rounded-2xl border border-hairline bg-white/[0.02] p-6 transition-colors hover:bg-white/[0.04]">
                     <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-brand opacity-0 blur-3xl transition-opacity group-hover:opacity-30" />
                     <div className="relative">
-                      <div className="text-xs font-medium uppercase tracking-widest text-gradient-brand">{x.t}</div>
+                      <div className="text-xs font-medium uppercase tracking-widest text-gradient-brand">
+                        {x.t}
+                      </div>
                       <p className="mt-3 text-white/90">{x.d}</p>
                     </div>
                   </div>
@@ -460,7 +640,11 @@ function ServicesSection() {
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHeading
             eyebrow="Our services"
-            title={<>Full-stack capabilities <br /> for the modern enterprise.</>}
+            title={
+              <>
+                Full-stack capabilities <br /> for the modern enterprise.
+              </>
+            }
           />
           <Reveal>
             <p className="max-w-md text-muted-foreground">
@@ -478,7 +662,8 @@ function ServicesSection() {
                 <motion.div
                   whileHover={{ y: -4 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="group relative h-full overflow-hidden rounded-3xl border border-hairline bg-white/[0.02] p-6 transition-colors hover:bg-white/[0.04]">
+                  className="group relative h-full overflow-hidden rounded-3xl border border-hairline bg-white/[0.02] p-6 transition-colors hover:bg-white/[0.04]"
+                >
                   <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#C76CDD]/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                   <IconTile Icon={IconComponent} />
                   <h3 className="mt-6 text-lg font-semibold text-white">{s.title}</h3>
@@ -498,10 +683,26 @@ function ServicesSection() {
 
 function SolutionsSection() {
   const items = [
-    { t: "Secure Cloud Foundations", d: "Landing zones, migrations and cloud-native platforms across Azure and Huawei Cloud.", tags: ["Azure", "Huawei Cloud", "Migration"] },
-    { t: "Zero Trust Security", d: "Identity, endpoint and network security modernized around Zero Trust principles.", tags: ["Fortinet", "Sophos", "Kaspersky"] },
-    { t: "Cyber Resilience", d: "Backup, disaster recovery and immutable data protection engineered for continuity.", tags: ["Veeam", "Acronis", "Commvault"] },
-    { t: "Modern Workplace", d: "Microsoft 365, collaboration and endpoint modernization for hybrid teams.", tags: ["Microsoft 365", "Intune", "Teams"] },
+    {
+      t: "Secure Cloud Foundations",
+      d: "Landing zones, migrations and cloud-native platforms across Azure and Huawei Cloud.",
+      tags: ["Azure", "Huawei Cloud", "Migration"],
+    },
+    {
+      t: "Zero Trust Security",
+      d: "Identity, endpoint and network security modernized around Zero Trust principles.",
+      tags: ["Fortinet", "Sophos", "Kaspersky"],
+    },
+    {
+      t: "Cyber Resilience",
+      d: "Backup, disaster recovery and immutable data protection engineered for continuity.",
+      tags: ["Veeam", "Acronis", "Commvault"],
+    },
+    {
+      t: "Modern Workplace",
+      d: "Microsoft 365, collaboration and endpoint modernization for hybrid teams.",
+      tags: ["Microsoft 365", "Intune", "Teams"],
+    },
   ];
   return (
     <section id="solutions" className="relative py-32">
@@ -509,7 +710,11 @@ function SolutionsSection() {
       <div className="relative mx-auto max-w-7xl px-6">
         <SectionHeading
           eyebrow="Solutions"
-          title={<>Outcome driven solutions, <span className="text-gradient-brand">purpose built.</span></>}
+          title={
+            <>
+              Outcome driven solutions, <span className="text-gradient-brand">purpose built.</span>
+            </>
+          }
           description="Reference architectures and integrated solutions that combine best-in-class platforms with Partnex engineering."
         />
         <div className="mt-16 grid gap-5 md:grid-cols-2">
@@ -524,8 +729,13 @@ function SolutionsSection() {
                   </div>
                   <p className="mt-3 max-w-md text-muted-foreground">{s.d}</p>
                   <div className="mt-6 flex flex-wrap gap-2">
-                    {s.tags.map(t => (
-                      <span key={t} className="rounded-full border border-hairline bg-white/[0.03] px-3 py-1 text-xs text-muted-foreground">{t}</span>
+                    {s.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full border border-hairline bg-white/[0.03] px-3 py-1 text-xs text-muted-foreground"
+                      >
+                        {t}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -544,7 +754,11 @@ function IndustriesSection() {
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           eyebrow="Industries"
-          title={<>Trusted across <span className="text-gradient-brand">every sector.</span></>}
+          title={
+            <>
+              Trusted across <span className="text-gradient-brand">every sector.</span>
+            </>
+          }
           description="Tailored technology solutions that address the unique challenges of each industry and deliver meaningful outcomes."
         />
         <div className="mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -571,9 +785,10 @@ function PartnersSection() {
 
   const partnersWithLogos = partners
     .map((partner) => {
-      const logoSource = typeof partner.logo === "object" && partner.logo !== null && "asset" in partner.logo
-        ? (partner.logo as { asset?: { url?: string } }).asset?.url
-        : undefined;
+      const logoSource =
+        typeof partner.logo === "object" && partner.logo !== null && "asset" in partner.logo
+          ? (partner.logo as { asset?: { url?: string } }).asset?.url
+          : undefined;
       const logoUrl = findLogoForFile(logoSource || partner.name);
       return { ...partner, logoUrl };
     })
@@ -591,7 +806,8 @@ function PartnersSection() {
           {partnersWithLogos.map((partner) => (
             <div
               key={partner.name}
-              className="group flex w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-0.75rem)] xl:w-[calc(20%-0.8rem)] 2xl:w-[calc(16.666%-0.8rem)] items-center justify-center rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_20px_60px_-45px_rgba(0,0,0,0.65)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_80px_-40px_rgba(0,0,0,0.55)]">
+              className="group flex w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-0.75rem)] xl:w-[calc(20%-0.8rem)] 2xl:w-[calc(16.666%-0.8rem)] items-center justify-center rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_20px_60px_-45px_rgba(0,0,0,0.65)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_80px_-40px_rgba(0,0,0,0.55)]"
+            >
               <div className="flex h-24 w-full items-center justify-center overflow-hidden rounded-3xl bg-background/70 p-4">
                 <OptimizedImage
                   src={partner.logoUrl}
@@ -608,14 +824,18 @@ function PartnersSection() {
   );
 }
 
-
 function WhySection() {
   return (
     <section id="why" className="relative py-32">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           eyebrow="Why Partnex"
-          title={<>Beyond technology. <br /> <span className="text-gradient-brand">Measurable value.</span></>}
+          title={
+            <>
+              Beyond technology. <br />{" "}
+              <span className="text-gradient-brand">Measurable value.</span>
+            </>
+          }
           description="We build lasting partnerships grounded in outcomes, expertise and trust."
         />
         <div className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -640,7 +860,12 @@ function ProcessSection() {
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           eyebrow="Our process"
-          title={<>From insight to impact, <br /> <span className="text-gradient-brand">we build the next.</span></>}
+          title={
+            <>
+              From insight to impact, <br />{" "}
+              <span className="text-gradient-brand">we build the next.</span>
+            </>
+          }
           description="A proven approach that ensures agility, clarity and results at every step."
         />
         <div className="mt-16 grid gap-px overflow-hidden rounded-3xl border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-4">
@@ -648,7 +873,9 @@ function ProcessSection() {
             <Reveal key={p.n} delay={i * 0.04}>
               <div className="group relative h-full bg-background p-7 transition-colors hover:bg-white/[0.03]">
                 <div className="flex items-center justify-between">
-                  <span className="font-display text-sm font-medium text-gradient-brand">{p.n}</span>
+                  <span className="font-display text-sm font-medium text-gradient-brand">
+                    {p.n}
+                  </span>
                   <div className="h-px w-10 bg-linear-to-r from-white/20 to-transparent" />
                 </div>
                 <h3 className="mt-5 text-lg font-semibold text-white">{p.t}</h3>
@@ -689,7 +916,9 @@ function StatsBanner() {
               ].map(([n, l]) => (
                 <Reveal key={l}>
                   <div>
-                    <div className="font-display text-4xl font-semibold text-white sm:text-5xl">{n}</div>
+                    <div className="font-display text-4xl font-semibold text-white sm:text-5xl">
+                      {n}
+                    </div>
                     <div className="mt-1 text-sm text-muted-foreground">{l}</div>
                   </div>
                 </Reveal>
@@ -711,7 +940,11 @@ function FaqSection() {
           <div className="lg:col-span-5">
             <SectionHeading
               eyebrow="FAQ"
-              title={<>Questions, <span className="text-gradient-brand">answered.</span></>}
+              title={
+                <>
+                  Questions, <span className="text-gradient-brand">answered.</span>
+                </>
+              }
               description="Everything you need to know about working with Partnex. Have another question? We're here."
             />
           </div>
@@ -734,10 +967,14 @@ function FaqSection() {
                           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                           className="overflow-hidden"
                         >
-                          <p className="pt-3 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+                          <p className="pt-3 text-sm leading-relaxed text-muted-foreground">
+                            {f.a}
+                          </p>
                         </motion.div>
                       </div>
-                      <div className={`mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-hairline transition-transform ${isOpen ? "rotate-45 bg-gradient-brand" : ""}`}>
+                      <div
+                        className={`mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-hairline transition-transform ${isOpen ? "rotate-45 bg-gradient-brand" : ""}`}
+                      >
                         <span className="text-lg leading-none text-white">+</span>
                       </div>
                     </div>
@@ -772,7 +1009,10 @@ function ContactSection() {
                 { Icon: Mail, l: "Info@partnex.net" },
                 { Icon: Phone, l: "01285454459" },
               ].map(({ Icon, l }) => (
-                <div key={l} className="flex items-center gap-4 rounded-[1.1rem] border border-hairline bg-white/[0.025] p-3">
+                <div
+                  key={l}
+                  className="flex items-center gap-4 rounded-[1.1rem] border border-hairline bg-white/[0.025] p-3"
+                >
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-hairline bg-white/[0.03]">
                     <Icon className="h-5 w-5 text-white" strokeWidth={1.6} />
                   </div>
@@ -787,7 +1027,6 @@ function ContactSection() {
   );
 }
 
-
 function Footer() {
   return (
     <footer className="relative border-t border-hairline">
@@ -800,24 +1039,50 @@ function Footer() {
               intelligent IT environments.
             </p>
             <div className="mt-6 flex items-center gap-3">
-              <a href="#" aria-label="LinkedIn"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-white/[0.03] transition-colors hover:bg-white/[0.08]">
+              <a
+                href="#"
+                aria-label="LinkedIn"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-white/[0.03] transition-colors hover:bg-white/[0.08]"
+              >
                 <Linkedin className="h-4 w-4 text-white" />
               </a>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-8 lg:col-span-7 sm:grid-cols-3">
             {[
-              ["Company", ["About", "#about"], ["Why Partnex", "#why"], ["Process", "#process"], ["Contact", "#contact"]],
-              ["Capabilities", ["Services", "#services"], ["Solutions", "#solutions"], ["Industries", "#industries"], ["Partners", "#partners"]],
-              ["Contact", ["Info@partnex.net", "mailto:Info@partnex.net"], ["01285454459", "tel:01285454459"]],
+              [
+                "Company",
+                ["About", "#about"],
+                ["Why Partnex", "#why"],
+                ["Process", "#process"],
+                ["Contact", "#contact"],
+              ],
+              [
+                "Capabilities",
+                ["Services", "#services"],
+                ["Solutions", "#solutions"],
+                ["Industries", "#industries"],
+                ["Partners", "#partners"],
+              ],
+              [
+                "Contact",
+                ["Info@partnex.net", "mailto:Info@partnex.net"],
+                ["01285454459", "tel:01285454459"],
+              ],
             ].map(([title, ...links]) => (
               <div key={title as string}>
-                <div className="text-xs font-semibold uppercase tracking-widest text-white">{title as string}</div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-white">
+                  {title as string}
+                </div>
                 <ul className="mt-4 space-y-2.5">
                   {(links as [string, string][]).map(([l, h]) => (
                     <li key={l}>
-                      <a href={h} className="text-sm text-muted-foreground transition-colors hover:text-white">{l}</a>
+                      <a
+                        href={h}
+                        className="text-sm text-muted-foreground transition-colors hover:text-white"
+                      >
+                        {l}
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -826,7 +1091,9 @@ function Footer() {
           </div>
         </div>
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-hairline pt-6 sm:flex-row sm:items-center">
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Partnex. All rights reserved.</p>
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Partnex. All rights reserved.
+          </p>
           <p className="text-xs text-muted-foreground">Build the Next.</p>
         </div>
       </div>
