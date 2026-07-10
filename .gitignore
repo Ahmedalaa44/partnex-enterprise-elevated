@@ -20,6 +20,11 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Sanity Studio
+studio/node_modules
+studio/.env.local
+studio/dist
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -33,3 +38,4 @@ dist-ssr
 
 .vercel
 .env*
+!.env.example

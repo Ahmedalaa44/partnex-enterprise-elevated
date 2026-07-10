@@ -1,0 +1,44 @@
+import {
+  Cloud, ShieldCheck, DatabaseBackup, Server, Laptop, Activity, Network, Compass,
+  ArrowRight, ArrowUpRight, Check, Menu, X, Mail, Phone, MapPin, Linkedin,
+  Building2, Landmark, Factory, HeartPulse, Hotel, Banknote, Plane, Briefcase,
+  GraduationCap, Radio, Truck, Globe2, Sparkles, ShieldAlert, Zap, Handshake,
+  Users, Target, type LucideIcon
+} from "lucide-react"
+
+const iconMap: Record<string, LucideIcon> = {
+  Cloud,
+  ShieldCheck,
+  DatabaseBackup,
+  Server,
+  Laptop,
+  Activity,
+  Network,
+  Compass,
+  Building2,
+  Landmark,
+  Factory,
+  HeartPulse,
+  Hotel,
+  Banknote,
+  Plane,
+  Briefcase,
+  GraduationCap,
+  Radio,
+  Truck,
+  Globe2,
+  Sparkles,
+  ShieldAlert,
+  Zap,
+  Handshake,
+  Users,
+  Target,
+}
+
+export function getIconByName(iconName?: string): LucideIcon {
+  if (!iconName) return Compass
+  const icon = iconMap[iconName]
+  return icon || Compass
+}
+
+export { iconMap }

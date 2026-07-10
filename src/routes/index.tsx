@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import heroImage from "../assets/hero-bg.jpg";
+import { useSanityContent } from "../hooks/useSanityContent";
 import {
   Cloud, ShieldCheck, DatabaseBackup, Server, Laptop, Activity, Network, Compass,
   ArrowRight, ArrowUpRight, Check, Menu, X, Mail, Phone, MapPin, Linkedin,
@@ -9,6 +10,7 @@ import {
   GraduationCap, Radio, Truck, Globe2, Sparkles, ShieldAlert, Zap, Handshake,
   Users, Target,
 } from "lucide-react";
+import { getIconByName } from "../lib/iconMapper";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -128,43 +130,12 @@ function SectionHeading({
   );
 }
 
-/* ---------------- Data ---------------- */
+/* ---------------- Data (Hardcoded fallbacks, overridden by Sanity) ----------- */
 
-const services = [
-  { icon: Cloud, title: "Cloud Solutions", desc: "Scalable cloud architectures that accelerate innovation, agility and time to value." },
-  { icon: ShieldCheck, title: "Cybersecurity", desc: "Advanced security programs that reduce risk and protect what matters most." },
-  { icon: DatabaseBackup, title: "Data Protection", desc: "Backup, disaster recovery and resilience engineered for continuity." },
-  { icon: Server, title: "Infrastructure", desc: "Modern infrastructure designed for performance, reliability and scale." },
-  { icon: Laptop, title: "Modern Workplace", desc: "Empowering teams to collaborate and work smarter from anywhere." },
-  { icon: Activity, title: "Managed Services", desc: "Proactive 24/7 monitoring, management and continuous optimization." },
-  { icon: Network, title: "Networking & Communication", desc: "High-performance connectivity that keeps your operations ahead." },
-  { icon: Compass, title: "Consulting & Advisory", desc: "Expert guidance aligning technology decisions with your business goals." },
-];
+// Services now loaded from Sanity via useSanityContent hook
+// See src/data/defaultContent.ts for fallback services array
 
-interface PartnerLogo {
-  name: string;
-  fileName: string;
-}
-
-const partners: PartnerLogo[] = [
-  { name: "Microsoft", fileName: "microsoft.svg" },
-  { name: "Huawei Cloud", fileName: "huawei-cloud.svg" },
-  { name: "Odoo", fileName: "odoo.svg" },
-  { name: "VMware", fileName: "vmware.svg" },
-  { name: "Fortinet", fileName: "fortinet.svg" },
-  { name: "Sophos", fileName: "sophos.jpg" },
-  { name: "Kaspersky", fileName: "kaspersky.svg" },
-  { name: "Veeam", fileName: "veeam.svg" },
-  { name: "Commvault", fileName: "commvault.jpg" },
-  { name: "Veritas", fileName: "veritas.svg" },
-  { name: "Adobe", fileName: "adobe.jpg" },
-  { name: "Autodesk", fileName: "autodesk.svg" },
-  { name: "HP", fileName: "hp.svg" },
-  { name: "Dell", fileName: "dell.svg" },
-  { name: "Lenovo", fileName: "lenovo.svg" },
-  { name: "Cisco", fileName: "cisco.svg" },
-  { name: "Hikvision", fileName: "hikvision.jpg" },
-];
+// Partner logos now loaded from Sanity via useSanityContent hook
 
 const partnerLogoModules = import.meta.glob("../assets/partner-logos/*.{svg,png,jpg,jpeg}", { eager: true }) as Record<string, { default: string }>;
 const partnerLogos: Record<string, string> = Object.fromEntries(
@@ -178,23 +149,6 @@ function findLogoForFile(fileName: string) {
   const key = Object.keys(partnerLogos).find((k) => k.replace(/\.[^.]+$/, "") === base);
   return key ? partnerLogos[key] : "";
 }
-
-const partnersWithLogos = partners.map((partner) => {
-  const logo = findLogoForFile(partner.fileName);
-  return { ...partner, logo };
-});
-
-if (typeof import.meta !== "undefined" && "hot" in import.meta) {
-  const missingLogos = partnersWithLogos.filter((partner) => !partner.logo);
-  if (missingLogos.length > 0) {
-    console.warn(
-      "Missing partner logo assets:",
-      missingLogos.map((partner) => partner.fileName).join(", "),
-      "\nPlace these files in src/assets/partner-logos/ and restart the dev server."
-    );
-  }
-}
-
 const industries = [
   { icon: Landmark, name: "Government", desc: "Enabling digital transformation and secure public services." },
   { icon: Building2, name: "Real Estate", desc: "Powering smart infrastructure and seamless operations." },
@@ -494,6 +448,9 @@ function IconTile({ Icon }: { Icon: typeof Cloud }) {
 }
 
 function ServicesSection() {
+  const { data: content } = useSanityContent();
+  const services = content.services || [];
+
   return (
     <section id="services" className="relative py-32">
       <div className="mx-auto max-w-7xl px-6">
@@ -511,22 +468,25 @@ function ServicesSection() {
         </div>
 
         <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((s, i) => (
-            <Reveal key={s.title} delay={i * 0.05}>
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="group relative h-full overflow-hidden rounded-3xl border border-hairline bg-white/[0.02] p-6 transition-colors hover:bg-white/[0.04]">
-                <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#C76CDD]/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                <IconTile Icon={s.icon} />
-                <h3 className="mt-6 text-lg font-semibold text-white">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-                <div className="mt-6 inline-flex items-center gap-1.5 text-xs font-medium text-white/70 transition-colors group-hover:text-white">
-                  Learn more <ArrowUpRight className="h-3.5 w-3.5" />
-                </div>
-              </motion.div>
-            </Reveal>
-          ))}
+          {services.map((s, i) => {
+            const IconComponent = getIconByName(s.icon);
+            return (
+              <Reveal key={s.title} delay={i * 0.05}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="group relative h-full overflow-hidden rounded-3xl border border-hairline bg-white/[0.02] p-6 transition-colors hover:bg-white/[0.04]">
+                  <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#C76CDD]/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                  <IconTile Icon={IconComponent} />
+                  <h3 className="mt-6 text-lg font-semibold text-white">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+                  <div className="mt-6 inline-flex items-center gap-1.5 text-xs font-medium text-white/70 transition-colors group-hover:text-white">
+                    Learn more <ArrowUpRight className="h-3.5 w-3.5" />
+                  </div>
+                </motion.div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -603,7 +563,14 @@ function IndustriesSection() {
 }
 
 function PartnersSection() {
-  const visiblePartners = partnersWithLogos.filter((partner) => partner.logo);
+  const { data: content } = useSanityContent();
+  const partners = content.partners || [];
+  
+  // Map partners with logos
+  const partnersWithLogos = partners.map((partner) => {
+    const logo = findLogoForFile(partner.logo?.asset?.url || partner.name);
+    return { ...partner, logoUrl: logo };
+  }).filter((partner) => partner.logoUrl);
 
   return (
     <section id="partners" className="relative py-24 md:py-28">
@@ -614,13 +581,13 @@ function PartnersSection() {
           </h2>
         </div>
         <div className="mt-14 flex flex-wrap justify-center gap-4">
-          {visiblePartners.map((partner) => (
+          {partnersWithLogos.map((partner) => (
             <div
               key={partner.name}
               className="group flex w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-0.75rem)] xl:w-[calc(20%-0.8rem)] 2xl:w-[calc(16.666%-0.8rem)] items-center justify-center rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_20px_60px_-45px_rgba(0,0,0,0.65)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_80px_-40px_rgba(0,0,0,0.55)]">
               <div className="flex h-24 w-full items-center justify-center overflow-hidden rounded-3xl bg-background/70 p-4">
                 <img
-                  src={partner.logo}
+                  src={partner.logoUrl}
                   alt={partner.name}
                   className="max-h-16 max-w-full object-contain"
                 />
