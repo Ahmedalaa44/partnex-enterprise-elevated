@@ -1,14 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useReducedMotion, useTransform } from "framer-motion";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import heroImage from "../assets/hero-bg.jpg";
+import { OptimizedImage } from "../components/OptimizedImage";
 import { useSanityContent } from "../hooks/useSanityContent";
 import {
-  Cloud, ShieldCheck, DatabaseBackup, Server, Laptop, Activity, Network, Compass,
   ArrowRight, ArrowUpRight, Check, Menu, X, Mail, Phone, MapPin, Linkedin,
   Building2, Landmark, Factory, HeartPulse, Hotel, Banknote, Plane, Briefcase,
   GraduationCap, Radio, Truck, Globe2, Sparkles, ShieldAlert, Zap, Handshake,
   Users, Target,
+  type LucideIcon,
 } from "lucide-react";
 import { getIconByName } from "../lib/iconMapper";
 
@@ -436,7 +437,7 @@ function AboutSection() {
   );
 }
 
-function IconTile({ Icon }: { Icon: typeof Cloud }) {
+function IconTile({ Icon }: { Icon: LucideIcon }) {
   return (
     <div className="relative">
       <div className="absolute inset-0 rounded-2xl bg-gradient-brand opacity-40 blur-xl transition-opacity duration-500 group-hover:opacity-70" />
@@ -586,10 +587,11 @@ function PartnersSection() {
               key={partner.name}
               className="group flex w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-0.75rem)] xl:w-[calc(20%-0.8rem)] 2xl:w-[calc(16.666%-0.8rem)] items-center justify-center rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_20px_60px_-45px_rgba(0,0,0,0.65)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_80px_-40px_rgba(0,0,0,0.55)]">
               <div className="flex h-24 w-full items-center justify-center overflow-hidden rounded-3xl bg-background/70 p-4">
-                <img
+                <OptimizedImage
                   src={partner.logoUrl}
                   alt={partner.name}
                   className="max-h-16 max-w-full object-contain"
+                  lazy
                 />
               </div>
             </div>
