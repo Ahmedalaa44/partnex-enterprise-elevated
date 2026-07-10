@@ -3,6 +3,7 @@ import { motion, useScroll, useReducedMotion, useTransform } from "framer-motion
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import heroImage from "../assets/hero-bg.jpg";
 import { OptimizedImage } from "../components/OptimizedImage";
+import { defaultHomeContent } from "../data/defaultContent";
 import { useSanityContent } from "../hooks/useSanityContent";
 import {
   ArrowRight, ArrowUpRight, Check, Menu, X, Mail, Phone, MapPin, Linkedin,
@@ -12,6 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { getIconByName } from "../lib/iconMapper";
+import type { HomePageContent } from "../lib/sanityTypes";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -450,7 +452,7 @@ function IconTile({ Icon }: { Icon: LucideIcon }) {
 
 function ServicesSection() {
   const { data: content } = useSanityContent();
-  const services = content.services || [];
+  const services: HomePageContent["services"] = content?.services ?? defaultHomeContent.services;
 
   return (
     <section id="services" className="relative py-32">
@@ -565,13 +567,17 @@ function IndustriesSection() {
 
 function PartnersSection() {
   const { data: content } = useSanityContent();
-  const partners = content.partners || [];
-  
-  // Map partners with logos
-  const partnersWithLogos = partners.map((partner) => {
-    const logo = findLogoForFile(partner.logo?.asset?.url || partner.name);
-    return { ...partner, logoUrl: logo };
-  }).filter((partner) => partner.logoUrl);
+  const partners: HomePageContent["partners"] = content?.partners ?? defaultHomeContent.partners;
+
+  const partnersWithLogos = partners
+    .map((partner) => {
+      const logoSource = typeof partner.logo === "object" && partner.logo !== null && "asset" in partner.logo
+        ? (partner.logo as { asset?: { url?: string } }).asset?.url
+        : undefined;
+      const logoUrl = findLogoForFile(logoSource || partner.name);
+      return { ...partner, logoUrl };
+    })
+    .filter((partner): partner is typeof partner & { logoUrl: string } => Boolean(partner.logoUrl));
 
   return (
     <section id="partners" className="relative py-24 md:py-28">

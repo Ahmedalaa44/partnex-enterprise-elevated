@@ -36,9 +36,17 @@ export interface ServiceItem {
   desc: string;
 }
 
+export interface SanityImageAsset {
+  url?: string;
+}
+
+export interface SanityImageRef {
+  asset?: SanityImageAsset;
+}
+
 export interface PartnerItem {
   name: string;
-  logo?: unknown;
+  logo?: SanityImageRef | string | null;
   website?: string;
 }
 

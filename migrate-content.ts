@@ -213,8 +213,9 @@ async function migrateContent() {
 
     console.log('\n✨ Content migration completed successfully!');
     console.log('All documents have been published to Sanity.');
-  } catch (error) {
-    console.error('❌ Migration failed:', error.message);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Unknown migration error';
+    console.error('❌ Migration failed:', message);
     process.exit(1);
   }
 }
