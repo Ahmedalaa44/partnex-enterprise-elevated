@@ -46,16 +46,16 @@
   --radius: 0.875rem;
 
   /* Partnex brand */
-  --background: oklch(0.16 0 0);            /* #141414 */
-  --foreground: oklch(0.98 0 0);
-  --surface: oklch(0.19 0.004 285);
-  --surface-elevated: oklch(0.22 0.006 285);
-  --hairline: oklch(1 0 0 / 0.08);
+  --background: #0f172a; /* slightly lighter dark background */
+  --foreground: #f8fafc;
+  --surface: #111827;
+  --surface-elevated: #1f2937;
+  --hairline: rgba(255, 255, 255, 0.08);
 
-  --card: oklch(0.19 0.004 285);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.19 0.004 285);
-  --popover-foreground: oklch(0.98 0 0);
+  --card: #111827;
+  --card-foreground: #f8fafc;
+  --popover: #111827;
+  --popover-foreground: #f8fafc;
 
   --brand-violet: oklch(0.63 0.19 285);     /* #7070E8 */
   --brand-magenta: oklch(0.68 0.22 330);    /* #C76CDD */
