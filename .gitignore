@@ -39,3 +39,8 @@ studio/dist
 .vercel
 .env*
 !.env.example
+
+# Admin app local build artifacts
+admin/.next/
+admin_build_output.txt
+
