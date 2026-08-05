@@ -9,6 +9,14 @@
       }
     },
     {
+      "src": "/chunks/(.*)",
+      "dest": "/chunks/$1"
+    },
+    {
+      "src": "/(index\\.js|favicon-.*|robots\\.txt|sitemap\\.xml|manifest\\.json|site\\.webmanifest)",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/__server"
     }
